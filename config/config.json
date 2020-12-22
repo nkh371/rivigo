@@ -1,0 +1,43 @@
+{
+    "port"        : 9998,
+    "socket_port" : 1338,
+    "host"        : "localhost",
+    "environment" : "development",
+    "mysql": {
+        "production" : {
+            "host": "127.0.0.1",
+            "username": "root",
+            "password": "root",
+            "database": "rivigo",
+            "options" : {
+                "port": 3306
+            }
+        },
+        "development" : {
+            "username": "root",
+            "password": "root",
+            "database": "rivigo",
+            "host": "localhost",
+            "options" : {
+                "host": "localhost",
+                "port": 3306,
+                "define": {
+                    "freezeTableName": true,
+                    "timestamps": false
+                },
+                "logging" : false
+            }
+        }
+    },
+    "redisParams":{
+        "production" : {
+            "host": "127.0.0.1",
+            "port": 6379
+        },
+        "development" : {
+            "host": "127.0.0.1",
+            "port": 6379
+       }
+    }
+}
+
