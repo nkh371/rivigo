@@ -131,15 +131,16 @@ var helper = {
             2: "Order Initiated",
             3: "Order Placed",
         };
-        let get_all_orders = await db.sequelize.query(`select  vehicle_id, src_city.name as src, dest_city.name as dest, if(status=1,"Order Placed", 
-        if(status=2, "Order Initiated", if(status=3,"Order Completed", "Order Cancelled")))
-        as order_status from orders o  join cities src_city on src_city.id=o.src
+        let get_all_orders = await db.sequelize.query(`select  vehicle_id, src_city.name as src, dest_city.name as dest, status from orders o  join cities src_city on src_city.id=o.src
         join cities dest_city on dest_city.id=o.dest where user_id=?;`, {
             replacements: [params.user_id],
             type: db.sequelize.QueryTypes.SELECT
         });
 
-        statusEnum[get_all_orders[0]].message;
+        get_all_orders.forEach(element => {
+            element.order_status = statusEnum[element.status];
+        });
+
 
         return get_all_orders;
     }
